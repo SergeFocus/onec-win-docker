@@ -11,6 +11,19 @@
 
 
 
+## Вопросы для исследования:
+
+- [ ] Проброс аппаратных ключей в контейнер
+- [ ] Сетевое взаимодействие (будет ли как linux контейнером)?
+- [*] Копировать уже установленный дистрибутив 1с (не нужно,)
+- [ ] Выяснить синтаксис команды инсталляции мси с помощью простого пакета 
+
+
+## TODO
+- [ ] Открыть порты для доступа к запущенному сервису.
+- [ ] Логи работы запускаемого приложения на консоль
+
+
 
 
 
@@ -26,8 +39,9 @@ VagrantFile - только запуск виртуальной машины wind
   docker exec -it $(docker ps -q) powershell
 
 #### В PS
+c интерфейсом 
 
-Start-Process msiexec.exe -Wait -ArgumentList '/i "C:\Users\ebessonov\Documents\repo\gitlab\onecdocker\onec-win-docker\distr\8.3.10.2650\windows64full\1CEnterprise 8 (x86-64).msi" /qn TRANSFORMS="1049.mst" /l*v install.log INSTALLSRVRASSRVC=0 DESIGNERALLCLIENTS=1 THICKCLIENT=1 THINCLIENTFILE=1 THINCLIENT=1 WEBSERVEREXT=1 SERVER=1 CONFREPOSSERVER=1 SERVERCLIENT=1 LANGUAGES=RU'
+Start-Process msiexec.exe -Wait -ArgumentList '/i "distr\8.3.10.2650\windows64full\1CEnterprise 8 (x86-64).msi" /qb TRANSFORMS="1049.mst" /l* install.log INSTALLSRVRASSRVC=0 DESIGNERALLCLIENTS=1 THICKCLIENT=1 THINCLIENTFILE=1 THINCLIENT=1 WEBSERVEREXT=1 SERVER=1 CONFREPOSSERVER=1 SERVERCLIENT=1 LANGUAGES=RU'
 
 
 Удаление
