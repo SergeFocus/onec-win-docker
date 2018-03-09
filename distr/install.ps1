@@ -1,0 +1,1 @@
+Start-Process msiexec.exe -Wait -ArgumentList '/i "C:\Users\ebessonov\Documents\repo\gitlab\onecdocker\onec-win-docker\distr\8.3.10.2650\windows64full\1CEnterprise 8 (x86-64).msi" /qn TRANSFORMS="1049.mst" /l*v install.log INSTALLSRVRASSRVC=0 DESIGNERALLCLIENTS=1 THICKCLIENT=1 THINCLIENTFILE=1 THINCLIENT=1 WEBSERVEREXT=1 SERVER=1 CONFREPOSSERVER=1 SERVERCLIENT=1 LANGUAGES=RU'
