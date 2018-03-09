@@ -1,3 +1,4 @@
+# escape=`
 # FROM microsoft/nanoserver
 FROM microsoft/windowsservercore
 
@@ -5,11 +6,18 @@ FROM microsoft/windowsservercore
 
 COPY distr c:/distr
 
-RUN dir c:\distr
+WORKDIR c:\distr
 
-SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+# RUN dir
 
-RUN Start-Process c:\windows\system32\msiexec.exe -Wait -ArgumentList '/i C:\\distr\\node.msi /qn /l* C:\\Windows\\Temp\\install.log'
+RUN powershell -Command $ErrorActionPreference = 'Stop';  `
+    Start-Process msiexec.exe -Wait -ArgumentList '/i node.msi /qn /l* C:\\Windows\\Temp\\install.log'
+
+# SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+# RUN Start-Process c:\windows\system32\msiexec.exe -Wait -ArgumentList '/i C:\\distr\\node.msi /qn /l* C:\\Windows\\Temp\\install.log'
+
+# RUN Start-Process c:\windows\system32\msiexec.exe -Wait -ArgumentList '/i "C:/distr/8.3.10.2650/windows64full/1CEnterprise\ 8\ (x86-64).msi" /qn /l* C:/Windows/Temp/install.log'
 
 # RUN ["c:\\windows\\system32\\msiexec.exe", "/i", "C:\\distr\\node.msi", "/qn", "/l* C:\\Windows\\Temp\\install.log" ]
 
