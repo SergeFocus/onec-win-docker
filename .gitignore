@@ -1,3 +1,4 @@
 distr/8*
 .vagrant
 *.msi
+./serverdata/*
