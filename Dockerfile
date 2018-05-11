@@ -28,4 +28,9 @@ WORKDIR C:\Program Files\1cv8\8.3.10.2650\bin\
 
 EXPOSE 1540 1541 1560-1591
 
+RUN powershell -Command $ErrorActionPreference = 'Stop';  `
+    New-Item -ItemType directory -Path C:\serverdata
+
+VOLUME [ "c:/serverdata" ]
+
 ENTRYPOINT [ "ragent.exe" ]

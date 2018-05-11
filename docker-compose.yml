@@ -23,6 +23,9 @@ services:
       - "1540:1540"
       - "1541:1541"
       - "1560-1591:1560-1591"
+    volumes:
+       - .\serverdata:C:\serverdata
+    # entrypoint: ragent.exe -d c:\\serverdata
 
   onec-ras:
     build:
