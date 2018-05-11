@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # db:
+  #   image: microsoft/mssql-server-windows-developer
+  #   environment:
+  #     sa_password: "Password1"
+  #     ACCEPT_EULA: "Y"
+  #   ports:
+  #     - "1433:1433" # REMARK: This is currently required, needs investigation
+  #   healthcheck:
+  #     test: [ "CMD", "sqlcmd", "-U", "sa", "-P", "Password1", "-Q", "select 1" ]
+  #     interval: 1s
+  #     retries: 30
+
+  onec-srv:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: onec-srv
+    container_name: onec-srv
+    hostname: onec-srv
+    ports:
+      - "1540:1540"
+      - "1541:1541"
+      - "1560-1591:1560-1591"
+
+  onec-ras:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: onec-srv
+    container_name: onec-ras
+    ports:
+      - "1545:1545"
+    entrypoint: ras.exe
+    command: "cluster onec-srv:1540"
