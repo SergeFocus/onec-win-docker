@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://v8.1c.ru/v8/tech-log">
+	<log history="4" location="C:\onec-srv\logs">
+		<event>
+			<ne property="name" value=""/>
+		</event>
+		<property name="all"/>
+	</log>
+	<dump create="true" type="0" prntscrn="true" location="C:\onec-srv\dumps"/>
+	<leaks collect="true">
+		<point call="client"/>
+		<point call="server"/>
+	</leaks>
+	<system level="trace"/>
+	<mem/>
+	<plansql/>
+	<dbmslocks/>
+	<scriptcircrefs/>
+</config>

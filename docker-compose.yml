@@ -25,7 +25,10 @@ services:
       - "1560-1591:1560-1591"
     volumes:
        - .\serverdata:C:\serverdata
-    # entrypoint: ragent.exe -d c:\\serverdata
+       - .\conf:C:\onec\bin\conf
+       - .\serverlogs\logs:C:\onec-srv\logs
+       - .\serverlogs\dumps:C:\onec-srv\dumps
+    entrypoint: ragent.exe -d c:\\serverdata
 
   onec-ras:
     build:

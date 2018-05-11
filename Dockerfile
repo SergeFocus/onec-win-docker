@@ -7,11 +7,13 @@ COPY distr c:/distr
 WORKDIR c:\distr\8.3.10.2650\windows64full\
 
 RUN powershell -Command $ErrorActionPreference = 'Stop';  `
-    Copy-Item -Path '1CEnterprise 8 (x86-64).msi' -Destination install.msi
-
-RUN powershell -Command $ErrorActionPreference = 'Stop';  `
+    New-Item -ItemType directory -Path C:\serverdata ; `
+    New-Item -ItemType directory -Path C:\onec-srv\dumps ; `
+    New-Item -ItemType directory -Path C:\onec-srv\logs ; `
+    Copy-Item -Path '1CEnterprise 8 (x86-64).msi' -Destination install.msi ; `
     Start-Process msiexec.exe -Wait `
     -ArgumentList '/i install.msi /qn `
+    INSTALLDIR="C:\\onec" `
     /l* C:\\Windows\\Temp\\install.log `
     INSTALLSRVRASSRVC=0 `
     SERVER=1 `
@@ -24,12 +26,11 @@ RUN powershell -Command $ErrorActionPreference = 'Stop';  `
     SERVERCLIENT=1 `
     LANGUAGES=RU'
 
-WORKDIR C:\Program Files\1cv8\8.3.10.2650\bin\
+WORKDIR C:\onec\bin\
+
+RUN RD /Q /S conf
 
 EXPOSE 1540 1541 1560-1591
-
-RUN powershell -Command $ErrorActionPreference = 'Stop';  `
-    New-Item -ItemType directory -Path C:\serverdata
 
 VOLUME [ "c:/serverdata" ]
 
