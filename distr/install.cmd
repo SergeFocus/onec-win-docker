@@ -1,4 +1,5 @@
-msiexec.exe /i 'C:\distr\8.3.10.2650\windows64full\1CEnterprise 8 (x86-64).msi' /qn TRANSFORMS="1049.mst" ^
+msiexec.exe /i 'C:\distr\8.3.10.2650\windows64full\1CEnterprise 8 (x86-64).msi' ^
+/qn TRANSFORMS="1049.mst" ^
 INSTALLSRVRASSRVC=0 ^
 DESIGNERALLCLIENTS=1 ^
 THICKCLIENT=1 ^
