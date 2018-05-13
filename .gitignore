@@ -3,3 +3,4 @@ distr/8*
 *.msi
 serverdata/*
 serverlogs/*
+storagedata/*

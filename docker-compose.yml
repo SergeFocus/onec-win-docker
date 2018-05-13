@@ -55,3 +55,17 @@ services:
       - "1545:1545"
     entrypoint: ras.exe
     command: "cluster onec-srv:1540"
+
+  onec-storage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: onec-srv
+    container_name: onec-storage
+    ports:
+      - "1542:1542"
+    volumes:
+       - .\storagedata:C:\storagedata
+    entrypoint: crserver.exe -d C:\\storagedata
+    
+
