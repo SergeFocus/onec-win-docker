@@ -28,6 +28,14 @@
 ### Рабочие заметки
 
 1. В папке distr нужна распакованная платформа (./distr/8.3.10.2650/windows64full/)
+2. Создание службы для сервера
+
+    - в compose переопределить исполняемый файл на `ping -t localhost`
+    - В интерактивном режиме выполнить
+
+```cmd
+sc create "onec-srv" binpath= "C:\onec\bin\ragent.exe -srvc -agent -regport 1541 -port 1540 -d C:\serverdata" displayname= "onec-srv" start= auto
+```
 
 #### Включить telnet
 
