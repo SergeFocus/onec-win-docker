@@ -6,6 +6,9 @@ services:
       sa_password: "Password1"
       ACCEPT_EULA: "Y"
     container_name: db-mssql
+    networks:
+      onec-network:
+        ipv4_address: 172.16.238.21
     ports:
       - "1433:1433" # REMARK: This is currently required, needs investigation
     healthcheck:
@@ -21,6 +24,9 @@ services:
     # environment:
     #   sa_password: "Password1"
     #   ACCEPT_EULA: "Y"
+    networks:
+      onec-network:
+        ipv4_address: 172.16.238.22
     ports:
       - "5432:5432"
     # healthcheck:
@@ -35,6 +41,9 @@ services:
     image: onec-srv
     container_name: onec-srv
     hostname: onec-srv
+    networks:
+      onec-network:
+        ipv4_address: 172.16.238.10
     ports:
       - "1540:1540"
       - "1541:1541"
@@ -51,6 +60,9 @@ services:
       dockerfile: ./onec/nano.Dockerfile
     image: onec-srv
     container_name: onec-ras
+    networks:
+      onec-network:
+        ipv4_address: 172.16.238.11
     ports:
       - "1545:1545"
     entrypoint: ras.exe
@@ -62,6 +74,9 @@ services:
       dockerfile: ./onec/Dockerfile
     image: onec-srv
     container_name: onec-storage
+    networks:
+      onec-network:
+        ipv4_address: 172.16.238.12
     ports:
       - "1542:1542"
     volumes:
@@ -69,9 +84,11 @@ services:
     entrypoint: crserver.exe -d C:\\storagedata
     
 
-# networks:
-#     outside:
-#        external:
-#           name: ExternalNetwork
-#     db-net:
-#        internal: true    
+networks:
+    onec-network:
+      driver: nat
+      # enable_ipv6: 
+      ipam:
+        driver: default
+        config:
+        - subnet: 172.16.238.0/24
