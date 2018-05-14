@@ -1,7 +1,7 @@
 winpty docker run -it --rm \
     --entrypoint powershell \
-    --network=onec-win-docker_default \
     onec-srv
+    # --network=onec-win-docker_default \
     # --link onec-srv:onec-srv \
     # --name onec-srv \
     # --hostname onec-srv \

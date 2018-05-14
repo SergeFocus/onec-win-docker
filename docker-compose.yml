@@ -5,7 +5,7 @@ services:
     environment:
       sa_password: "Password1"
       ACCEPT_EULA: "Y"
-    container_name: mssql-srv
+    container_name: db-mssql
     ports:
       - "1433:1433" # REMARK: This is currently required, needs investigation
     healthcheck:
@@ -31,7 +31,7 @@ services:
   onec-srv:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./onec/Dockerfile
     image: onec-srv
     container_name: onec-srv
     hostname: onec-srv
@@ -48,7 +48,7 @@ services:
   onec-ras:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./onec/nano.Dockerfile
     image: onec-srv
     container_name: onec-ras
     ports:
@@ -59,7 +59,7 @@ services:
   onec-storage:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./onec/Dockerfile
     image: onec-srv
     container_name: onec-storage
     ports:
@@ -69,3 +69,9 @@ services:
     entrypoint: crserver.exe -d C:\\storagedata
     
 
+# networks:
+#     outside:
+#        external:
+#           name: ExternalNetwork
+#     db-net:
+#        internal: true    
