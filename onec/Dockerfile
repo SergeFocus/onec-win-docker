@@ -4,15 +4,17 @@ FROM microsoft/windowsservercore
 
 COPY distr c:/distr
 
-WORKDIR c:\distr\8.3.10.2650\windows64full\
+WORKDIR c:\distr\
 
 RUN powershell -Command $ErrorActionPreference = 'Stop';  `
     New-Item -ItemType directory -Path C:\serverdata ; `
-    New-Item -ItemType directory -Path C:\onec-srv\dumps ; `
-    New-Item -ItemType directory -Path C:\onec-srv\logs ; `
-    Copy-Item -Path '1CEnterprise 8 (x86-64).msi' -Destination install.msi ; `
+    New-Item -ItemType directory -Path C:\serverlogs ; `
+    New-Item -ItemType directory -Path C:\storagedata ; `
+    Invoke-WebRequest -Method Get -Uri https://download.microsoft.com/download/B/E/D/BED73AAC-3C8A-43F5-AF4F-EB4FEA6C8F3A/ENU/x64/sqlncli.msi `
+    -OutFile sqlncli_x64.msi ; `
+    Copy-Item -Path 'windows64full\\1CEnterprise 8 (x86-64).msi' -Destination windows64full\\install.msi ; `
     Start-Process msiexec.exe -Wait `
-    -ArgumentList '/i install.msi /qn `
+    -ArgumentList '/i windows64full\\install.msi /qn `
     INSTALLDIR="C:\\onec" `
     /l* C:\\Windows\\Temp\\install.log `
     INSTALLSRVRASSRVC=0 `
@@ -24,14 +26,19 @@ RUN powershell -Command $ErrorActionPreference = 'Stop';  `
     WEBSERVEREXT=1 `
     CONFREPOSSERVER=1 `
     SERVERCLIENT=1 `
-    LANGUAGES=RU'
+    LANGUAGES=RU' ; `
+    Start-Process msiexec.exe -Wait `
+    -ArgumentList '/i sqlncli_x64.msi /qn `
+    IACCEPTSQLNCLILICENSETERMS=YES'
 
 WORKDIR C:\onec\bin\
 
-RUN RD /Q /S conf
+RUN powershell -Command $ErrorActionPreference = 'Stop';  `
+    Remove-Item c:\distr\ -Force -Recurse ; `
+    Remove-Item .\conf -Force -Recurse
 
 EXPOSE 1540 1541 1560-1591
 
-VOLUME [ "c:/serverdata" ]
+VOLUME [ "c:/serverdata", "C:/serverlogs", "C:/storagedata" ]
 
 ENTRYPOINT [ "ragent.exe" ]

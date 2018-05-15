@@ -1,4 +1,5 @@
-distr/8*
+distr/windows64full/*
+!distr/windows64full/README.md
 .vagrant
 *.msi
 serverdata/*
