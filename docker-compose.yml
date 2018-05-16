@@ -93,7 +93,7 @@ services:
       onec-network:
         ipv4_address: 172.16.238.31
     ports:
-      - "8000:8000"
+      - "81:8000"
     volumes:
        - .\iis:C:\site
     # entrypoint: crserver.exe -d C:\\storagedata
