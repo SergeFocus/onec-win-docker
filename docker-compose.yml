@@ -83,6 +83,21 @@ services:
        - .\storagedata:C:\storagedata
     entrypoint: crserver.exe -d C:\\storagedata
     
+  onec-iis:
+    build:
+      context: .
+      dockerfile: ./iis/Dockerfile
+    image: onec-iis
+    container_name: onec-iis
+    networks:
+      onec-network:
+        ipv4_address: 172.16.238.31
+    ports:
+      - "8000:8000"
+    volumes:
+       - .\iis:C:\site
+    # entrypoint: crserver.exe -d C:\\storagedata
+    
 
 networks:
     onec-network:
