@@ -22,13 +22,12 @@ docker-compose up -d onec-storage
 
 Порт по-умолчанию `1542` может быть переопределен в файле [docker-compose.yml](./docker-compose.yml)
 
-
 ## Вопросы для исследования
 
 - [ ] Проброс аппаратных ключей в контейнер
 - [ ] Сетевое взаимодействие (будет ли как linux контейнером)?
 - [*] Копировать уже установленный дистрибутив 1с (не нужно,)
-- [*] Выяснить синтаксис команды инсталляции мси с помощью простого пакета 
+- [*] Выяснить синтаксис команды инсталляции мси с помощью простого пакета
 
 ## TODO
 
@@ -38,9 +37,6 @@ docker-compose up -d onec-storage
 - [ ] Очистка каталога дистрибутива
 - [+] Задать имя запускаемого контейнера
 
-
-
-
 ### Рабочие заметки
 
 1. В папке distr нужна распакованная платформа (./distr/8.3.10.2650/windows64full/)
@@ -49,16 +45,23 @@ docker-compose up -d onec-storage
     - в compose переопределить исполняемый файл на `ping -t localhost`
     - В интерактивном режиме выполнить
 
-```cmd
-sc create "onec-srv" binpath= "C:\onec\bin\ragent.exe -srvc -agent -regport 1541 -port 1540 -d C:\serverdata" displayname= "onec-srv" start= auto
-```
+    ```cmd
+    sc create "onec-srv" binpath= "C:\onec\bin\ragent.exe -srvc -agent -regport 1541 -port 1540 -d C:\serverdata" displayname= "onec-srv" start= auto
+    ```
 
 3. Ссылки на документацию по PG
   [Запускаем PostgreSQL без инсталляции](https://habr.com/post/101678/)
   [16.2.3. Установка в командной строке (PostgresPRO)](https://postgrespro.ru/docs/postgrespro/10/binary-installation-on-windows#WIN-CLI-INSTALLATION)
 
 4. Ссылки для чтения:
-  1. [Docker on Windows: Windows-containers-specific](https://26thcentury.com/reading-list-devops-build-test-deploy-automation-monitoring/#dockerWindowsContainersSpecific)
+
+    [Docker on Windows: Windows-containers-specific](https://26thcentury.com/reading-list-devops-build-test-deploy-automation-monitoring/#dockerWindowsContainersSpecific)
+
+5. Заполнение файлов на основе переменных:
+    [GREP and SED with PowerShell](https://blogs.msdn.microsoft.com/zainnab/2007/07/08/grep-and-sed-with-powershell/)
+    ```powershell
+    cat .\default.vrd | % { $_ -replace "127.0.0.1","$Env:COMPUTERNAME"} > default.vrd.new
+    ```
 
 #### Включить telnet
 
