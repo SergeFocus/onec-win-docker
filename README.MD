@@ -53,6 +53,12 @@ docker-compose up -d onec-storage
 sc create "onec-srv" binpath= "C:\onec\bin\ragent.exe -srvc -agent -regport 1541 -port 1540 -d C:\serverdata" displayname= "onec-srv" start= auto
 ```
 
+3. Ссылки на документацию по PG
+  [Запускаем PostgreSQL без инсталляции](https://habr.com/post/101678/)
+  [16.2.3. Установка в командной строке (PostgresPRO)](https://postgrespro.ru/docs/postgrespro/10/binary-installation-on-windows#WIN-CLI-INSTALLATION)
+
+4. Ссылки для чтения:
+  1. [Docker on Windows: Windows-containers-specific](https://26thcentury.com/reading-list-devops-build-test-deploy-automation-monitoring/#dockerWindowsContainersSpecific)
 
 #### Включить telnet
 
