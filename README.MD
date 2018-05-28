@@ -92,3 +92,9 @@ Start-Process msiexec.exe -Wait -ArgumentList '/x "C:\Users\ebessonov\Documents\
 
 после инсталляции
   node --version
+
+
+#### Эксперименты с платформой x32
+
+Проверка доступности ключа при запуски из консоли нескольких версий платформы.
+
